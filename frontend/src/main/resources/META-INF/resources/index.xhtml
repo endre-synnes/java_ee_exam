@@ -7,10 +7,25 @@
         xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 >
 
+<ui:composition template="layout.xhtml">
 
+    <ui:define name="title">
+        Title
+    </ui:define>
 
+    <ui:define name="content">
 
+        <h2>Title here...</h2>
 
+        <sec:authenticated>
+            You are logged in this is index page
+        </sec:authenticated>
+        <sec:anonymous>
+            You are not logged in.
+        </sec:anonymous>
 
+    </ui:define>
+
+</ui:composition>
 
 </html>
