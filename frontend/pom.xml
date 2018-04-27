@@ -108,32 +108,48 @@
     </dependencies>
 
     <build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-        </plugin>
-        <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-            <version>${version.springboot}</version>
-            <configuration>
-                <finalName>java_ee_exam</finalName>
-                <classifier>exec</classifier>
-            </configuration>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>repackage</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${version.springboot}</version>
+                <configuration>
+                    <finalName>java_ee_exam</finalName>
+                    <classifier>exec</classifier>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
 
-
-    <!--Add plugin for heroku here-->
-
+        <!--<pluginManagement>-->
+            <!--<plugins>-->
+                <!--<plugin>-->
+                    <!--<groupId>com.heroku.sdk</groupId>-->
+                    <!--<artifactId>heroku-maven-plugin</artifactId>-->
+                    <!--<version>2.0.2</version>-->
+                    <!--<configuration>-->
+                        <!--<appName>springquizgame</appName>-->
+                        <!--<includeTarget>false</includeTarget>-->
+                        <!--<includes>-->
+                            <!--<include>target/quizgame-exec.jar</include>-->
+                        <!--</includes>-->
+                        <!--<processTypes>-->
+                            <!--<web>java -Dserver.port=$PORT -jar target/quizgame-exec.jar</web>-->
+                        <!--</processTypes>-->
+                    <!--</configuration>-->
+                <!--</plugin>-->
+            <!--</plugins>-->
+        <!--</pluginManagement>-->
     </build>
 
 </project>
