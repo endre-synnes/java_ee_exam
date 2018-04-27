@@ -1,9 +1,6 @@
 package com.endre.java.java_ee_exam.selenium;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -71,14 +68,29 @@ public abstract class PageObject {
         element.sendKeys(text);
     }
 
-    protected Boolean waitForPageToLoad() {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        WebDriverWait wait = new WebDriverWait(driver, 10); //give up after 10 seconds
+//    protected Boolean waitForPageToLoad() {
+//        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+//        WebDriverWait wait = new WebDriverWait(driver, 10); //give up after 10 seconds
+//
+//        //keep executing the given JS till it returns "true", when page is fully loaded and ready
+//        return wait.until((ExpectedCondition<Boolean>) input -> {
+//            String res = jsExecutor.executeScript("return /loaded|complete/.test(document.readyState);").toString();
+//            return Boolean.parseBoolean(res);
+//        });
+//    }
 
-        //keep executing the given JS till it returns "true", when page is fully loaded and ready
-        return wait.until((ExpectedCondition<Boolean>) input -> {
-            String res = jsExecutor.executeScript("return /loaded|complete/.test(document.readyState);").toString();
-            return Boolean.parseBoolean(res);
+    protected Boolean waitForPageToLoad(){
+        return new WebDriverWait(driver, 10).until(driver -> {
+            try {
+                JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+
+                return Boolean.parseBoolean(javascriptExecutor.executeScript(
+                        "return /loaded|complete/.test(document.readyState);").toString()
+                );
+            } catch (NoSuchWindowException e){
+                System.out.println("Window name not found" + driver.getTitle());
+                return false;
+            }
         });
     }
 }
