@@ -16,7 +16,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
-public class SeleniumLocalIt extends SeleniumTestBase{
+public class SeleniumLocalIT extends SeleniumTestBase{
 
 
     private static WebDriver driver;
