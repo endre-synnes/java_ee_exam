@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:sec="http://www.springframework.org/security/tags"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+>
+
+<ui:composition template="layout.xhtml">
+
+    <ui:define name="title">
+        Admin
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h2>Welcome to the Admin page</h2>
+
+        <sec:authenticated>
+            You are logged in this is the Admin page
+        </sec:authenticated>
+        <sec:anonymous>
+            You are not logged in.
+        </sec:anonymous>
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

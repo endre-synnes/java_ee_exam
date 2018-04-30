@@ -22,6 +22,11 @@
                 <h:outputText value="Password: "/>
                 <h:inputSecret id="password" value="#{signUpController.password}" class="login"/><br/>
 
+
+                <h:outputText value="Are you an Admin?"/>
+                <h:selectBooleanCheckbox value="#{signUpController.admin}" id="ceckIsAdmin"/>
+
+
                 <h:commandButton id="submit" value="Sign Up" action="#{signUpController.signUpUser}" class="gameBtn"/>
             </div>
 

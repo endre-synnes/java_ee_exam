@@ -29,11 +29,13 @@ public class SignUpController {
 
     private String password;
 
+    private boolean isAdmin = false;
+
     public String signUpUser(){
 
         boolean registered = false;
         try {
-            registered = userService.createUser(username, password);
+            registered = userService.createUser(username, password, isAdmin);
         }catch (Exception e){
             //Do nothing
         }
@@ -73,5 +75,13 @@ public class SignUpController {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

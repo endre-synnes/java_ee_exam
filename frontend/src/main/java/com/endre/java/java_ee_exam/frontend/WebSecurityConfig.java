@@ -34,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         try {
             http.csrf().disable();
             http.authorizeRequests()
+                    .antMatchers("/admin.jsf").access("hasRole('ROLE_ADMIN')")
                     .antMatchers("/", "/index.jsf", "/signup.jsf", "/assets/**").permitAll()
                     .antMatchers("/javax.faces.resource/**").permitAll()
                     .antMatchers("/ui/**").authenticated()
@@ -65,9 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                     "WHERE username = ?"
                     )
                     .authoritiesByUsernameQuery(
-                            "SELECT x.username, y.roles " +
-                                    "FROM users x, user_roles y " +
-                                    "WHERE x.username = ? and y.user_username = x.username "
+                            "SELECT user_username, roles FROM user_roles WHERE user_username=?"
                     )
                     /*
                         Note: in BCrypt, the "password" field also contains the salt
