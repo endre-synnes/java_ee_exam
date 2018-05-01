@@ -46,6 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureUrl("/login.jsf?error=true")
                     .defaultSuccessUrl("/index.jsf")
                     .and()
+                    .exceptionHandling().accessDeniedPage("/error/403.jsf")
+                    .and()
                     .logout()
                     .logoutSuccessUrl("/index.jsf");
         }catch (Exception ex){

@@ -29,7 +29,7 @@
     <sec:authenticated>
         <p><h:outputText value="Hi #{userInfoController.userName}!"/></p>
 
-        <a id="logoutId" href="logout" class="btn">Log Out</a>
+        <a id="logoutId" href="/logout" class="btn">Log Out</a>
 
         <c:if test="#{userInfoController.userRole}">
             <a id="adminId" href="admin/admin.jsf" class="btn">To Admin</a>
