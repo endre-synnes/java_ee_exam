@@ -66,16 +66,16 @@ public abstract class SeleniumTestBase {
         assertTrue(home.getDriver().getPageSource().contains(username));
     }
 
-    @Test
-    public void testCreateAdminAndGoToAdminPage() {
-        assertFalse(home.isLoggedIn());
-
-        String username = getUniqueId();
-        String password = "123456789";
-        home = createNewUser(username, password, true);
-
-        AdminPO adminPO = home.goToAdmin();
-
-        assertTrue(adminPO.isOnPage());
-    }
+//    @Test
+//    public void testCreateAdminAndGoToAdminPage() {
+//        assertFalse(home.isLoggedIn());
+//
+//        String username = getUniqueId();
+//        String password = "123456789";
+//        home = createNewUser(username, password, true);
+//
+//        AdminPO adminPO = home.goToAdmin();
+//
+//        assertTrue(adminPO.isOnPage());
+//    }
 }
