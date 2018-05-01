@@ -78,4 +78,13 @@ public abstract class SeleniumTestBase {
 
         assertTrue(adminPO.isOnPage());
     }
+
+
+    @Test
+    public void testLogInWithNonExistingUser() {
+
+        //TODO Test if log in with non existing user
+
+
+    }
 }

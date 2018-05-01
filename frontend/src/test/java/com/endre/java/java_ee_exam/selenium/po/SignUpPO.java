@@ -15,6 +15,7 @@ public class SignUpPO extends LayoutPO {
         return getDriver().getTitle().contains("Sign Up");
     }
 
+    //TODO Check if name still the same
     public IndexPO createUser(String userName, String password){
 
         setText("username", userName);
@@ -28,6 +29,7 @@ public class SignUpPO extends LayoutPO {
         return null;
     }
 
+    //TODO Check if name still the same
     public IndexPO createAdmin(String userName, String password){
         setText("username", userName);
         setText("password", password);

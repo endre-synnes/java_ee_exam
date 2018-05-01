@@ -14,6 +14,7 @@ public class AdminPO extends LayoutPO {
         super(other);
     }
 
+    //TODO Check if title still the same
     @Override
     public boolean isOnPage() {
         return getDriver().getTitle().contains("Admin Page");

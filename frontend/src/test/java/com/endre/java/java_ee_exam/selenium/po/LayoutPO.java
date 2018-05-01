@@ -17,6 +17,7 @@ public abstract class LayoutPO extends PageObject {
         super(other);
     }
 
+    //TODO Check if name still the same
     public SignUpPO toSignUp(){
         clickAndWait("linkToSignUpId");
 
@@ -26,6 +27,7 @@ public abstract class LayoutPO extends PageObject {
         return po;
     }
 
+    //TODO Check if name still the same
     public AdminPO goToAdmin(){
         clickAndWait("adminId");
 
@@ -35,6 +37,7 @@ public abstract class LayoutPO extends PageObject {
         return po;
     }
 
+    //TODO Check if name still the same
     public IndexPO doLogout(){
         clickAndWait("logoutId");
 
@@ -44,6 +47,7 @@ public abstract class LayoutPO extends PageObject {
         return po;
     }
 
+    //TODO Check if name still the same
     public boolean isLoggedIn(){
         return getDriver().findElements(By.id("logoutId")).size() > 0 &&
                 getDriver().findElements(By.id("linkToSignUpId")).isEmpty();
