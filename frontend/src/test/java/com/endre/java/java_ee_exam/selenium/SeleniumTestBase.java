@@ -2,6 +2,7 @@ package com.endre.java.java_ee_exam.selenium;
 
 import com.endre.java.java_ee_exam.selenium.po.IndexPO;
 import com.endre.java.java_ee_exam.selenium.po.SignUpPO;
+import com.endre.java.java_ee_exam.selenium.po.admin.AdminPO;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -27,14 +28,18 @@ public abstract class SeleniumTestBase {
 
     private IndexPO home;
 
-    private IndexPO createNewUser(String username, String password){
+    private IndexPO createNewUser(String username, String password, boolean isAdmin){
         home.toStartPage();
 
         SignUpPO signUpPO = home.toSignUp();
 
-        IndexPO indexPO = signUpPO.createUser(username, password);
-        assertNotNull(indexPO);
+        IndexPO indexPO;
+        if (isAdmin)
+            indexPO = signUpPO.createAdmin(username, password);
+        else
+            indexPO = signUpPO.createUser(username, password);
 
+        assertNotNull(indexPO);
         return indexPO;
     }
 
@@ -55,9 +60,22 @@ public abstract class SeleniumTestBase {
 
         String username = getUniqueId();
         String password = "12345678";
-        home = createNewUser(username, password);
+        home = createNewUser(username, password, false);
 
         assertTrue(home.isLoggedIn());
         assertTrue(home.getDriver().getPageSource().contains(username));
+    }
+
+    @Test
+    public void testCreateAdminAndGoToAdminPage() {
+        assertFalse(home.isLoggedIn());
+
+        String username = getUniqueId();
+        String password = "123456789";
+        home = createNewUser(username, password, true);
+
+        AdminPO adminPO = home.goToAdmin();
+
+        assertTrue(adminPO.isOnPage());
     }
 }

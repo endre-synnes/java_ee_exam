@@ -1,6 +1,7 @@
 package com.endre.java.java_ee_exam.selenium.po;
 
 import com.endre.java.java_ee_exam.selenium.PageObject;
+import com.endre.java.java_ee_exam.selenium.po.admin.AdminPO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -20,6 +21,15 @@ public abstract class LayoutPO extends PageObject {
         clickAndWait("linkToSignUpId");
 
         SignUpPO po = new SignUpPO(this);
+        assertTrue(po.isOnPage());
+
+        return po;
+    }
+
+    public AdminPO goToAdmin(){
+        clickAndWait("adminId");
+
+        AdminPO po = new AdminPO(this);
         assertTrue(po.isOnPage());
 
         return po;
