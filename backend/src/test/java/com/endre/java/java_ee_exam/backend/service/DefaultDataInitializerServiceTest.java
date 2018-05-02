@@ -15,12 +15,8 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFOR
 @SpringBootTest(classes = StubApplication.class,
     webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @DirtiesContext(classMode = BEFORE_CLASS)
-public class DefaultDataInitializerServiceTest {
+public class DefaultDataInitializerServiceTest{
 
-    @Test
-    public void dummyTest() {
-        int i = 1;
-        assertEquals(1,i);
-    }
+
 
 }

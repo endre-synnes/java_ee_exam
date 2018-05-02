@@ -1,6 +1,7 @@
 package com.endre.java.java_ee_exam.backend.service;
 
 import com.endre.java.java_ee_exam.backend.entity.Book;
+import com.endre.java.java_ee_exam.backend.entity.Message;
 import com.endre.java.java_ee_exam.backend.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ public class ResetService {
 
         deleteEntities(Book.class);
         deleteEntities(User.class);
+        deleteEntities(Message.class);
     }
 
     private void deleteEntities(Class<?> entity) {
