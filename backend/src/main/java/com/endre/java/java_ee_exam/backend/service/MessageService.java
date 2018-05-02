@@ -18,7 +18,7 @@ public class MessageService {
     @Autowired
     private EntityManager em;
 
-    public boolean createMessage(String sender, String receiver, String text){
+    public Long createMessage(String sender, String receiver, String text){
 
         User senderUser = em.find(User.class, sender);
         User receiverUser = em.find(User.class, receiver);
@@ -33,7 +33,7 @@ public class MessageService {
         message.setDate(new Date());
 
         em.persist(message);
-        return true;
+        return message.getId();
     }
 
     public List<Message> getReceivedMessages(String receiver){
@@ -42,7 +42,7 @@ public class MessageService {
             throw new IllegalArgumentException("User with email: " + receiver + " does not exist!");
         }
 
-        TypedQuery<Message> query = em.createQuery("select m from Message m where m.receiver=?1", Message.class);
+        TypedQuery<Message> query = em.createQuery("select m from Message m where m.receiver=?1 order by m.date desc", Message.class);
         query.setParameter(1, receiver);
 
         List<Message> messages = query.getResultList();
@@ -54,13 +54,13 @@ public class MessageService {
         return messages;
     }
 
-    public List<Message> getSendtMessages(String sender){
+    public List<Message> getSentMessages(String sender){
         User user = em.find(User.class, sender);
         if (user == null){
             throw new IllegalArgumentException("User with email: " + sender + " does not exist!");
         }
 
-        TypedQuery<Message> query = em.createQuery("select m from Message m where m.sender=?1", Message.class);
+        TypedQuery<Message> query = em.createQuery("select m from Message m where m.sender=?1 order by m.date desc", Message.class);
         query.setParameter(1, sender);
 
         List<Message> messages = query.getResultList();

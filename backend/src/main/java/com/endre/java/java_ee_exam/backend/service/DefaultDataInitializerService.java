@@ -16,7 +16,6 @@ public class DefaultDataInitializerService {
     public void initialize(){
         attempt(() -> userService.createUser("bar.barer@email.com", "foo","bar", "123",  false));
 
-        attempt(() -> userService.createUser("fo.foorer@email.com", "bar", "bar", "123", true));
 
     }
 
