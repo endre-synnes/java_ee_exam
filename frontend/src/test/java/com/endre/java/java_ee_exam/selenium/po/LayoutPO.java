@@ -27,6 +27,15 @@ public abstract class LayoutPO extends PageObject {
         return po;
     }
 
+    public LoginPO toLogin(){
+        clickAndWait("linkToLoginId");
+
+        LoginPO po = new LoginPO(this);
+        assertTrue(po.isOnPage());
+
+        return po;
+    }
+
     //TODO Check if name still the same
     public AdminPO goToAdmin(){
         clickAndWait("adminId");
