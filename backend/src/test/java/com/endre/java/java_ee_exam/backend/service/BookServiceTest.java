@@ -29,7 +29,7 @@ public class BookServiceTest extends ServiceTestBase{
 
     private String getUniqueBookTitle(){return "defaultTitle_" + counter.getAndIncrement();}
 
-
+    //TODO: Ikke bare create book men persist en default om denne metoden blir kalt.
     private Book createDefaultBook(){
         Book book = new Book();
         book.setTitle(getUniqueBookTitle());
@@ -195,9 +195,9 @@ public class BookServiceTest extends ServiceTestBase{
 
         String userEmail = "me@me.com";
 
-        bookService.addUserTooBook(book.getTitle(), userEmail);
+        assertTrue(bookService.addUserTooBook(userEmail, book.getTitle()));
 
-        assertFalse(bookService.addUserTooBook(book.getTitle(), userEmail));
+        assertFalse(bookService.addUserTooBook(userEmail, book.getTitle()));
     }
 
     @Test
@@ -213,6 +213,6 @@ public class BookServiceTest extends ServiceTestBase{
 
         String userEmail = "me@me.com";
 
-        assertFalse(bookService.removeUserFromBook(book.getTitle(), userEmail));
+        assertFalse(bookService.removeUserFromBook(userEmail, book.getTitle()));
     }
 }
