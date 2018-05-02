@@ -1,5 +1,6 @@
 package com.endre.java.java_ee_exam.backend.service;
 
+import com.endre.java.java_ee_exam.backend.entity.Book;
 import com.endre.java.java_ee_exam.backend.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,9 +18,12 @@ public class ResetService {
     private EntityManager em;
     
     public void resetDatabase(){
-        Query query = em.createNativeQuery("delete from user_roles");
-        query.executeUpdate();
-        
+        Query delete_from_user_roles = em.createNativeQuery("delete from user_roles");
+        delete_from_user_roles.executeUpdate();
+        Query delete_from_book_user = em.createNativeQuery("delete from book_users");
+        delete_from_book_user.executeUpdate();
+
+        deleteEntities(Book.class);
         deleteEntities(User.class);
     }
 

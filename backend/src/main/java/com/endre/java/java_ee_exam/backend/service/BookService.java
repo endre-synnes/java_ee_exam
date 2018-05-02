@@ -40,38 +40,79 @@ public class BookService {
     }
 
 
-    public List<Book> getAllBooks(boolean withUser){
-
+    public List<Book> getAllBooks(){
         TypedQuery<Book> query = em.createQuery("select b from Book b", Book.class);
         List<Book> books = query.getResultList();
 
-        if (withUser){
-            books.forEach( book -> book.getUsers().size());
-        }
+        if (books.size() == 0)
+            return null;
 
         return books;
+
     }
 
 
-    public List<Book> getAllBooksForSale(boolean withUser){
-        TypedQuery<Book> query = em.createQuery("select b from Book b where count(b.users) > 0", Book.class);
+    public List<Book> getAllBooksForSale(){
+        TypedQuery<Book> query = em.createQuery("select b from Book b where size(b.users) > 0", Book.class);
         List<Book> books = query.getResultList();
 
-        if (withUser){
-            books.forEach( book -> book.getUsers().size());
-        }
+        if (books.size() == 0)
+            return null;
 
         return books;
     }
 
 
+    public Book getBook(String title){
+        TypedQuery<Book> query = em.createQuery("select b from Book b where b.title=?1", Book.class);
+        query.setParameter(1, title);
+
+        List<Book> resultList = query.getResultList();
+
+        if (resultList.size() == 0){
+            return null;
+        }
+
+        return resultList.get(0);
+    }
+
+
+    public boolean addUserTooBook(String userEmail, String title){
+        Book book = getBook(title);
+
+        if (book == null){
+            return false;
+        }
+
+        if (book.getUsers().contains(userEmail)) {
+            return false;
+        }
+
+        book.getUsers().add(userEmail);
+        return true;
+    }
+
+    public boolean removeUserFromBook(String userEmail, String title){
+        Book book = getBook(title);
+
+        if (book == null) {
+            return false;
+        }
+
+        if (!book.getUsers().contains(userEmail)) {
+            return false;
+        }
+
+        book.getUsers().remove(userEmail);
+        return true;
+    }
 
     public boolean deleteBook(String title){
+        Book book = getBook(title);
+        if (book == null)
+            return false;
 
-        TypedQuery<Book> deleteQuery = em.createQuery("delete from Book b where b.title=?1", Book.class);
-        deleteQuery.setParameter(1, title);
-
-        em.persist(deleteQuery);
+        em.remove(getBook(title));
         return true;
     }
 

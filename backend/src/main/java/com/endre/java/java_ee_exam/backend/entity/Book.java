@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "BOOKS")
@@ -32,11 +33,10 @@ public class Book {
     @Size(max = 128)
     private String course;
 
-    @OneToMany()
-    private List<User> users;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> users;
 
     public Book() {
-        users = new ArrayList<>();
     }
 
     public Long getId() {
@@ -71,11 +71,11 @@ public class Book {
         this.course = course;
     }
 
-    public List<User> getUsers() {
+    public Set<String> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set<String> users) {
         this.users = users;
     }
 

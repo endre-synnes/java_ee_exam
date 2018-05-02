@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = StubApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class UserServiceTest {
+public class UserServiceTest extends ServiceTestBase{
 
     @Autowired
     private UserService userService;
