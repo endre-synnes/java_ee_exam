@@ -15,6 +15,8 @@ public class DefaultDataInitializerService {
     @PostConstruct
     public void initialize(){
         attempt(() -> userService.createUser("bar.barer@email.com", "foo","bar", "123",  false));
+
+
     }
 
     private <T> T attempt(Supplier<T> lambda){

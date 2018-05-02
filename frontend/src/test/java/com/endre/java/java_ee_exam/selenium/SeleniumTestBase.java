@@ -10,9 +10,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public abstract class SeleniumTestBase {
 
@@ -104,11 +102,32 @@ public abstract class SeleniumTestBase {
 //        assertTrue(home.isLoggedIn());
 //    }
 
+
+    @Test
+    public void testSignUpWithNullValue() {
+        assertFalse(home.isLoggedIn());
+
+        try {
+            String email = getUniqueId();
+            String firtname = null;
+            String surname = "bar";
+            String password = "123456789";
+            home = createNewUser(email, firtname, surname, password, true);
+            fail();
+        }catch (Exception e){
+
+        }
+
+    }
+
     @Test
     public void testLogInWithNonExistingUser() {
 
-        //TODO Test if log in with non existing user
+        assertFalse(home.isLoggedIn());
 
+        home.toStartPage();
+        LoginPO loginPO = home.toLogin();
 
+        assertNull(loginPO.logInUser(getUniqueId(), "123"));
     }
 }
