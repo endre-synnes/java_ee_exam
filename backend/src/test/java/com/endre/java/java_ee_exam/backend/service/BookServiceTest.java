@@ -2,7 +2,6 @@ package com.endre.java.java_ee_exam.backend.service;
 
 import com.endre.java.java_ee_exam.backend.StubApplication;
 import com.endre.java.java_ee_exam.backend.entity.Book;
-import com.endre.java.java_ee_exam.backend.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,7 @@ public class BookServiceTest extends ServiceTestBase{
     public void testCreateBook() {
         Book book = createDefaultBook();
 
-        assertTrue(bookService.createBook(
+        assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
                 book.getCourse(),
@@ -55,13 +54,13 @@ public class BookServiceTest extends ServiceTestBase{
     public void testCreateDuplicateBook() {
         Book book = createDefaultBook();
 
-        assertTrue(bookService.createBook(
+        assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
                 book.getCourse(),
                 book.isUsed()));
 
-        assertFalse(bookService.createBook(
+        assertNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
                 book.getCourse(),
@@ -77,7 +76,7 @@ public class BookServiceTest extends ServiceTestBase{
     public void testGetAllBooks() {
         Book book = createDefaultBook();
 
-        assertTrue(bookService.createBook(
+        assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
                 book.getCourse(),
@@ -90,7 +89,7 @@ public class BookServiceTest extends ServiceTestBase{
     public void testCreateBookWithSeller() {
         Book book = createDefaultBook();
 
-        assertTrue(bookService.createBook(
+        assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
                 book.getCourse(),
@@ -113,7 +112,7 @@ public class BookServiceTest extends ServiceTestBase{
     public void testRemoveUserFromBook() {
         Book book = createDefaultBook();
 
-        assertTrue(bookService.createBook(
+        assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
                 book.getCourse(),
@@ -134,16 +133,29 @@ public class BookServiceTest extends ServiceTestBase{
     }
 
     @Test
-    public void testGetBook() {
+    public void testGetBookByTitle() {
         Book book = createDefaultBook();
 
-        assertTrue(bookService.createBook(
+        assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
                 book.getCourse(),
                 book.isUsed()));
 
         assertNotNull(bookService.getBook(book.getTitle()));
+    }
+
+    @Test
+    public void testGetBookById() {
+        Book book = createDefaultBook();
+
+        Long id = bookService.createBook(
+                book.getTitle(),
+                book.getAuthor(),
+                book.getCourse(),
+                book.isUsed());
+
+        assertEquals(id, bookService.getBook(book.getTitle()).getId());
     }
 
     @Test
@@ -155,7 +167,7 @@ public class BookServiceTest extends ServiceTestBase{
     public void testDeleteBook() {
         Book book = createDefaultBook();
 
-        assertTrue(bookService.createBook(
+        assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
                 book.getCourse(),
@@ -187,7 +199,7 @@ public class BookServiceTest extends ServiceTestBase{
 
         Book book = createDefaultBook();
 
-        assertTrue(bookService.createBook(
+        assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
                 book.getCourse(),
@@ -205,7 +217,7 @@ public class BookServiceTest extends ServiceTestBase{
 
         Book book = createDefaultBook();
 
-        assertTrue(bookService.createBook(
+        assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
                 book.getCourse(),

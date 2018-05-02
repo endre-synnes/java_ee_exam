@@ -17,7 +17,7 @@ public class BookService {
     private EntityManager em;
 
 
-    public boolean createBook(String title, String author, String course, boolean isUsed){
+    public Long createBook(String title, String author, String course, boolean isUsed){
 
         TypedQuery<Book> query = em.createQuery("select b from Book b where b.title=?1", Book.class);
         query.setParameter(1, title);
@@ -25,7 +25,7 @@ public class BookService {
         List<Book> resultList = query.getResultList();
 
         if (resultList.size() > 0){
-            return false;
+            return null;
         }
 
         Book book = new Book();
@@ -36,7 +36,7 @@ public class BookService {
 
         em.persist(book);
 
-        return true;
+        return book.getId();
     }
 
 
