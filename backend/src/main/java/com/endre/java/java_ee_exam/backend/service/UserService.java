@@ -20,16 +20,18 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public boolean createUser(String username, String password, boolean isAdmin){
+    public boolean createUser(String email, String firstname, String surname, String password, boolean isAdmin){
 
         String hashedPassword = passwordEncoder.encode(password);
 
-        if (em.find(User.class, username) != null){
+        if (em.find(User.class, email) != null){
             return false;
         }
 
         User user = new User();
-        user.setUsername(username);
+        user.setEmail(email);
+        user.setFirstname(firstname);
+        user.setSurname(surname);
         user.setPassword(hashedPassword);
         if (isAdmin)
             user.setRoles(Collections.singleton("ROLE_ADMIN"));

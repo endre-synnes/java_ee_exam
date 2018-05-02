@@ -16,9 +16,11 @@ public class SignUpPO extends LayoutPO {
     }
 
     //TODO Check if name still the same
-    public IndexPO createUser(String userName, String password){
+    public IndexPO createUser(String email, String firstname, String surname, String password){
 
-        setText("username", userName);
+        setText("email", email);
+        setText("firstname", firstname);
+        setText("surname", surname);
         setText("password", password);
         clickAndWait("submit");
 
@@ -30,8 +32,10 @@ public class SignUpPO extends LayoutPO {
     }
 
     //TODO Check if name still the same
-    public IndexPO createAdmin(String userName, String password){
-        setText("username", userName);
+    public IndexPO createAdmin(String email, String firstname, String surname, String password){
+        setText("email", email);
+        setText("firstname", firstname);
+        setText("surname", surname);
         setText("password", password);
         driver.findElement(By.id("ceckIsAdmin")).click();
         clickAndWait("submit");

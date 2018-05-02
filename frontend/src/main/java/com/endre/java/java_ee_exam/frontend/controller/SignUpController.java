@@ -25,9 +25,15 @@ public class SignUpController {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    private String username;
+    private String email;
+
+    private String firtname;
+
+    private String surname;
 
     private String password;
+
+
 
     private boolean isAdmin = false;
 
@@ -35,14 +41,14 @@ public class SignUpController {
 
         boolean registered = false;
         try {
-            registered = userService.createUser(username, password, isAdmin);
+            registered = userService.createUser(email, firtname, surname, password, isAdmin);
         }catch (Exception e){
             //Do nothing
         }
 
         if (registered){
 
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                     userDetails,
                     password,
@@ -60,15 +66,6 @@ public class SignUpController {
         }
     }
 
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -83,5 +80,29 @@ public class SignUpController {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public String getFirtname() {
+        return firtname;
+    }
+
+    public void setFirtname(String firtname) {
+        this.firtname = firtname;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

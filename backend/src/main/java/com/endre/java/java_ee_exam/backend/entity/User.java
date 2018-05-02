@@ -12,7 +12,13 @@ public class User {
 
     @Id
     @NotBlank
-    private String username;
+    private String email;
+
+    @NotBlank
+    private String firstname;
+
+    @NotBlank
+    private String surname;
 
     @NotBlank
     private String password;
@@ -26,12 +32,12 @@ public class User {
     public User() {
     }
 
-    public String getUsername() {
-        return username;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getPassword() {
@@ -58,4 +64,19 @@ public class User {
         this.enabled = enabled;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

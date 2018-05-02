@@ -22,19 +22,19 @@ public class UserServiceTest {
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
-    private String getUniqueId(){return "foo_seleniumTest_" + counter.getAndIncrement();}
+    private String getUniqueId(){return "foo_email_" + counter.getAndIncrement();}
 
     @Test
     public void testCreateUser() {
-        assertTrue(userService.createUser(getUniqueId(), "123", false));
+        assertTrue(userService.createUser(getUniqueId(), "foo", "bar", "123", false));
     }
 
 
     @Test
     public void testCreateDuplicateUser() {
-        String username = getUniqueId();
+        String email = getUniqueId();
 
-        assertTrue(userService.createUser(username, "123", false));
-        assertFalse(userService.createUser(username, "123", false));
+        assertTrue(userService.createUser(email, "bar", "barer","123", false));
+        assertFalse(userService.createUser(email, "bar", "barer","123",  false));
     }
 }

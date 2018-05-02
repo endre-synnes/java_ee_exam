@@ -17,11 +17,17 @@
                            rendered="${!empty param['error']}"/>
 
             <div>
-                <h:outputText value="Username: "/>
-                <h:inputText id="username" value="#{signUpController.username}" class="login"/><br/>
+                <h:outputText value="Email: "/>
+                <h:inputText id="email" value="#{signUpController.email}" class="login"/><br/>
+
+                <h:outputText value="First Name: "/>
+                <h:inputText id="firstname" value="#{signUpController.firtname}" class="login"/><br/>
+
+                <h:outputText value="Sur Name: "/>
+                <h:inputText id="surname" value="#{signUpController.surname}" class="login"/><br/>
+
                 <h:outputText value="Password: "/>
                 <h:inputSecret id="password" value="#{signUpController.password}" class="login"/><br/>
-
 
                 <h:outputText value="Are you an Admin?"/>
                 <h:selectBooleanCheckbox value="#{signUpController.admin}" id="ceckIsAdmin"/>

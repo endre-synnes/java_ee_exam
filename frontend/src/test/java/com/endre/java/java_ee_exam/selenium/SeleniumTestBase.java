@@ -24,20 +24,20 @@ public abstract class SeleniumTestBase {
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
-    private String getUniqueId(){return "foo_seleniumTest_" + counter.getAndIncrement();}
+    private String getUniqueId(){return "email_seleniumTest_" + counter.getAndIncrement() + "@me.com";}
 
     private IndexPO home;
 
-    private IndexPO createNewUser(String username, String password, boolean isAdmin){
+    private IndexPO createNewUser(String email, String firstname, String surname, String password, boolean isAdmin){
         home.toStartPage();
 
         SignUpPO signUpPO = home.toSignUp();
 
         IndexPO indexPO;
         if (isAdmin)
-            indexPO = signUpPO.createAdmin(username, password);
+            indexPO = signUpPO.createAdmin(email, firstname, surname, password);
         else
-            indexPO = signUpPO.createUser(username, password);
+            indexPO = signUpPO.createUser(email, firstname, surname, password);
 
         assertNotNull(indexPO);
         return indexPO;
@@ -58,21 +58,25 @@ public abstract class SeleniumTestBase {
     public void testCreateAndLogoutUser() {
         assertFalse(home.isLoggedIn());
 
-        String username = getUniqueId();
+        String email = getUniqueId();
+        String firtname = "foo";
+        String surname = "bar";
         String password = "12345678";
-        home = createNewUser(username, password, false);
+        home = createNewUser(email, firtname, surname, password, false);
 
         assertTrue(home.isLoggedIn());
-        assertTrue(home.getDriver().getPageSource().contains(username));
+        assertTrue(home.getDriver().getPageSource().contains(email));
     }
 
     @Test
     public void testCreateAdminAndGoToAdminPage() {
         assertFalse(home.isLoggedIn());
 
-        String username = getUniqueId();
+        String email = getUniqueId();
+        String firtname = "foo";
+        String surname = "bar";
         String password = "123456789";
-        home = createNewUser(username, password, true);
+        home = createNewUser(email, firtname, surname, password, true);
 
         AdminPO adminPO = home.goToAdmin();
 
