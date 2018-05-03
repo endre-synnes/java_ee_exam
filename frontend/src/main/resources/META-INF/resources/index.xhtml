@@ -4,7 +4,7 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:sec="http://www.springframework.org/security/tags"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
 >
 
 <ui:composition template="layout.xhtml">
@@ -17,9 +17,54 @@
 
         <h2>Title here...</h2>
 
-        <sec:authenticated>
-            You are logged in this is index page
-        </sec:authenticated>
+
+
+        <c:set var="bookList" value="#{bookController.books}"/>
+
+        <div class="bookDiv">
+            <c:if test="#{bookList.size() != 0}">
+                <h:dataTable value="#{bookList}" var="book" border="1" id="bookTable">
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                        <h:outputLabel value="#{book.title}" class="bookTitle"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Author</f:facet>
+                        <h:outputLabel value="#{book.author}" class="bookTitle"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Cource</f:facet>
+                        <h:outputLabel value="#{book.course}" class="bookTitle"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Used</f:facet>
+                        <h:outputLabel value="#{book.used}" class="bookTitle"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Number of serllers</f:facet>
+                        <h:outputLabel value="#{book.users.size()}" class="bookTitle"/>
+                    </h:column>
+                    <sec:authenticated>
+                        <h:column>
+                            <f:facet name="header">Sell</f:facet>
+                                <c:when test="#{!bookController.getIfUserInBookList(book.title)}">
+                                    <h:form>
+                                        <h:commandButton id="idAddUserToBook" value="Sell this book" action="#{bookController.addSellerToBook(book.title)}" class="btn"/>
+                                    </h:form>
+                                </c:when>
+                                <c:otherwise>
+                                    <h:form>
+                                        <h:commandButton id="idRemoveUserFromBook" value="Not Selling this book" action="#{bookController.removeSellerFromBook(book.title)}" class="btn"/>
+                                    </h:form>
+                                </c:otherwise>
+                        </h:column>
+                    </sec:authenticated>
+                </h:dataTable>
+            </c:if>
+
+        </div>
+
+
         <sec:anonymous>
             You are not logged in.
         </sec:anonymous>

@@ -160,7 +160,12 @@ public class BookServiceTest extends ServiceTestBase{
 
     @Test
     public void testGetNonExistingBook() {
-        assertNull(bookService.getBook(getUniqueBookTitle()));
+        try {
+            bookService.getBook(getUniqueBookTitle());
+            fail();
+        }catch (IllegalArgumentException e){
+            //Do nothing
+        }
     }
 
     @Test
@@ -178,19 +183,34 @@ public class BookServiceTest extends ServiceTestBase{
 
     @Test
     public void testDeleteNonExistingBook() {
-        assertFalse(bookService.deleteBook(getUniqueBookTitle()));
+        try {
+            bookService.deleteBook(getUniqueBookTitle());
+            fail();
+        }catch (IllegalArgumentException e){
+            //Do nothing
+        }
     }
 
 
     @Test
     public void testAddUserToBookIfNoBookExist() {
-        assertFalse(bookService.addUserTooBook("me@me.com", getUniqueBookTitle()));
+        try {
+            bookService.addUserTooBook("me@me.com", getUniqueBookTitle());
+            fail();
+        }catch (IllegalArgumentException e){
+            //Do nothing
+        }
     }
 
 
     @Test
     public void testRemoveUserIfBookNotExist() {
-        assertFalse(bookService.removeUserFromBook("me@me.com", getUniqueBookTitle()));
+        try {
+            bookService.removeUserFromBook("me@me.com", getUniqueBookTitle());
+            fail();
+        }catch (IllegalArgumentException e){
+            //Do nothing
+        }
     }
 
 

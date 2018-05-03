@@ -11,6 +11,16 @@ a:visited{
     color: rgb(71, 53, 25);
 }
 
+.bookDiv{
+    width: 100%;
+    display: block;
+}
+#bookTable{
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+}
+
 .btn{
     border: 1px solid rgb(30,30,30);
     border-radius: 5px;

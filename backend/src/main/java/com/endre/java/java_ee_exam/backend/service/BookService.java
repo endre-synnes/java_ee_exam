@@ -70,7 +70,7 @@ public class BookService {
         List<Book> resultList = query.getResultList();
 
         if (resultList.size() == 0){
-            return null;
+            throw new IllegalArgumentException("Book with title: " + title + " does not exist");
         }
 
         return resultList.get(0);
@@ -80,11 +80,7 @@ public class BookService {
     public boolean addUserTooBook(String userEmail, String title){
         Book book = getBook(title);
 
-        if (book == null){
-            return false;
-        }
-
-        if (book.getUsers().contains(userEmail)) {
+        if (isUserInBookList(userEmail, title)) {
             return false;
         }
 
@@ -95,11 +91,7 @@ public class BookService {
     public boolean removeUserFromBook(String userEmail, String title){
         Book book = getBook(title);
 
-        if (book == null) {
-            return false;
-        }
-
-        if (!book.getUsers().contains(userEmail)) {
+        if (!isUserInBookList(userEmail, title)) {
             return false;
         }
 
@@ -108,13 +100,14 @@ public class BookService {
     }
 
     public boolean deleteBook(String title){
-        Book book = getBook(title);
-        if (book == null)
-            return false;
-
         em.remove(getBook(title));
         return true;
     }
 
 
+    public boolean isUserInBookList(String userEmail, String title){
+        Book book = getBook(title);
+
+        return book.getUsers().contains(userEmail);
+    }
 }
