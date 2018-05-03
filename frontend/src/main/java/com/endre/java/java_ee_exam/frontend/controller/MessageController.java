@@ -1,11 +1,13 @@
 package com.endre.java.java_ee_exam.frontend.controller;
 
+import com.endre.java.java_ee_exam.backend.entity.Message;
 import com.endre.java.java_ee_exam.backend.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Named
@@ -24,6 +26,7 @@ public class MessageController implements Serializable {
 
     private String messageSent;
 
+
     public String toSendMessage(String receiver){
         this.receiver = receiver;
         messageSent = "";
@@ -39,6 +42,15 @@ public class MessageController implements Serializable {
     private void clearFields() {
         message = "";
         messageSent = "Message sent!";
+    }
+    
+
+    public List<Message> getReceivedMessages(){
+        return messageService.getReceivedMessages(userInfoController.getUserName());
+    }
+
+    public List<Message> getSentMessages(){
+        return messageService.getSentMessages(userInfoController.getUserName());
     }
 
     public String getReceiver() {

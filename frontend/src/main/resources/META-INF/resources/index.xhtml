@@ -26,7 +26,7 @@
 
         <div class="bookDiv">
             <c:if test="#{bookList.size() != 0}">
-                <h:dataTable value="#{bookList}" var="book" border="1" id="bookTable">
+                <h:dataTable value="#{bookList}" var="book" border="1" class="bookTable">
                     <h:column>
                         <f:facet name="header">Title</f:facet>
                         <h:form>

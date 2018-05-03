@@ -16,7 +16,7 @@ a:visited{
     display: block;
 }
 
-#bookTable{
+.bookTable{
     position: relative;
     width: 80%;
     margin: 0 auto;
