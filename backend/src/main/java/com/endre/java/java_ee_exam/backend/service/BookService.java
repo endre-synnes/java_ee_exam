@@ -17,7 +17,7 @@ public class BookService {
     private EntityManager em;
 
 
-    public Long createBook(String title, String author, String course, boolean isUsed){
+    public Long createBook(String title, String author, String course){
 
         TypedQuery<Book> query = em.createQuery("select b from Book b where b.title=?1", Book.class);
         query.setParameter(1, title);
@@ -32,7 +32,6 @@ public class BookService {
         book.setTitle(title);
         book.setAuthor(author);
         book.setCourse(course);
-        book.setUsed(isUsed);
 
         em.persist(book);
 

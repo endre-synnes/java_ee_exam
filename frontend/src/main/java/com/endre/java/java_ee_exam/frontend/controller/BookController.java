@@ -7,42 +7,57 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 @Named
-@RequestScoped
-public class BookController {
+@SessionScoped
+public class BookController implements Serializable {
 
     @Autowired
     private BookService bookService;
 
-    public List<Book> getBooks(){
-        return bookService.getAllBooks();
-    }
+    private Book bookObject;
+
+    private Set<String> sellers;
 
     private String getUerName(){
         return ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
     }
 
     public String addSellerToBook(String bookTitle){
-        boolean addedSeller = bookService.addUserTooBook(getUerName(), bookTitle);
-        System.out.println(addedSeller);
+        bookService.addUserTooBook(getUerName(), bookTitle);
         return "/index.jsf";
     }
 
     public String removeSellerFromBook(String bookTitle){
-        boolean addedSeller = bookService.removeUserFromBook(getUerName(), bookTitle);
-        System.out.println(addedSeller);
+        bookService.removeUserFromBook(getUerName(), bookTitle);
         return "/index.jsf";
     }
 
     public boolean getIfUserInBookList(String bookTitle){
-        System.out.println("Book title here:........................"+ bookTitle);
-        System.out.println("Is user in book list.......!!!!!! "+bookService.isUserInBookList(getUerName(), bookTitle));
         return bookService.isUserInBookList(getUerName(), bookTitle);
     }
 
+
+    public String goToDetails(String bookTitle){
+        bookObject = bookService.getBook(bookTitle);
+        sellers = bookObject.getUsers();
+        return "/ui/bookDetail.jsf?faces-redirect=true";
+    }
+
+    public Book getBookObject() {
+        return bookObject;
+    }
+
+    public List<Book> getBooks(){
+        return bookService.getAllBooks();
+    }
+
+    public Set<String> getSellers() {
+        return sellers;
+    }
 }

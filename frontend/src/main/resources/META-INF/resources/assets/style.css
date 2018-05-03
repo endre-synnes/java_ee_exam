@@ -21,6 +21,12 @@ a:visited{
     margin: 0 auto;
 }
 
+#sellerTable{
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+}
+
 .btn{
     border: 1px solid rgb(30,30,30);
     border-radius: 5px;

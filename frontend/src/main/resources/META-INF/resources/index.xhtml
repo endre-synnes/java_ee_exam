@@ -26,7 +26,9 @@
                 <h:dataTable value="#{bookList}" var="book" border="1" id="bookTable">
                     <h:column>
                         <f:facet name="header">Title</f:facet>
-                        <h:outputLabel value="#{book.title}" class="bookTitle"/>
+                        <h:form>
+                            <h:commandLink id="goToDetails" value="#{book.title}" action="#{bookController.goToDetails(book.title)}"/>
+                        </h:form>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Author</f:facet>
@@ -37,26 +39,22 @@
                         <h:outputLabel value="#{book.course}" class="bookTitle"/>
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Used</f:facet>
-                        <h:outputLabel value="#{book.used}" class="bookTitle"/>
-                    </h:column>
-                    <h:column>
                         <f:facet name="header">Number of serllers</f:facet>
                         <h:outputLabel value="#{book.users.size()}" class="bookTitle"/>
                     </h:column>
                     <sec:authenticated>
                         <h:column>
                             <f:facet name="header">Sell</f:facet>
-                                <c:when test="#{!bookController.getIfUserInBookList(book.title)}">
-                                    <h:form>
-                                        <h:commandButton id="idAddUserToBook" value="Sell this book" action="#{bookController.addSellerToBook(book.title)}" class="btn"/>
-                                    </h:form>
-                                </c:when>
-                                <c:otherwise>
-                                    <h:form>
-                                        <h:commandButton id="idRemoveUserFromBook" value="Not Selling this book" action="#{bookController.removeSellerFromBook(book.title)}" class="btn"/>
-                                    </h:form>
-                                </c:otherwise>
+                            <c:when test="#{!bookController.getIfUserInBookList(book.title)}">
+                                <h:form>
+                                    <h:commandButton id="idAddUserToBook" value="Sell this book" action="#{bookController.addSellerToBook(book.title)}" class="btn"/>
+                                </h:form>
+                            </c:when>
+                            <c:otherwise>
+                                <h:form>
+                                    <h:commandButton id="idRemoveUserFromBook" value="Not Selling this book" action="#{bookController.removeSellerFromBook(book.title)}" class="btn"/>
+                                </h:form>
+                            </c:otherwise>
                         </h:column>
                     </sec:authenticated>
                 </h:dataTable>

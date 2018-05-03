@@ -29,6 +29,8 @@
     <sec:authenticated>
         <p><h:outputText value="Hi #{userInfoController.userName}!"/></p>
 
+        <a id="linkToHomeId" href="/index.jsf" class="btn">Home</a>
+
         <a id="logoutId" href="/logout" class="btn">Log Out</a>
 
         <c:if test="#{userInfoController.userRole}">
@@ -36,8 +38,11 @@
         </c:if>
     </sec:authenticated>
 
+
     <sec:anonymous>
         <p>Please log in!</p>
+        <a id="linkToHomeNotLoggedIn" href="/index.jsf" class="btn">Home</a>
+
         <a id="linkToLoginId" href="login.jsf" class="btn">Log In</a>
         <a id="linkToSignUpId" href="signup.jsf" class="btn">Sign Up</a>
     </sec:anonymous>

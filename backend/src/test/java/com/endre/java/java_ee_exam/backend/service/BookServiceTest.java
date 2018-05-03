@@ -32,7 +32,6 @@ public class BookServiceTest extends ServiceTestBase{
     private Book createDefaultBook(){
         Book book = new Book();
         book.setTitle(getUniqueBookTitle());
-        book.setUsed(false);
         book.setAuthor("TestAuthor");
         book.setCourse("TestCourse");
         return book;
@@ -45,8 +44,7 @@ public class BookServiceTest extends ServiceTestBase{
         assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
-                book.getCourse(),
-                book.isUsed()));
+                book.getCourse()));
     }
 
 
@@ -57,14 +55,12 @@ public class BookServiceTest extends ServiceTestBase{
         assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
-                book.getCourse(),
-                book.isUsed()));
+                book.getCourse()));
 
         assertNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
-                book.getCourse(),
-                book.isUsed()));
+                book.getCourse()));
     }
 
     @Test
@@ -79,8 +75,7 @@ public class BookServiceTest extends ServiceTestBase{
         assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
-                book.getCourse(),
-                book.isUsed()));
+                book.getCourse()));
 
         assertTrue(bookService.getAllBooks().size() > 0);
     }
@@ -92,8 +87,7 @@ public class BookServiceTest extends ServiceTestBase{
         assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
-                book.getCourse(),
-                book.isUsed()));
+                book.getCourse()));
 
         String email = "mee@mee.com";
 
@@ -115,8 +109,7 @@ public class BookServiceTest extends ServiceTestBase{
         assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
-                book.getCourse(),
-                book.isUsed()));
+                book.getCourse()));
 
         String email = "mee@mee.com";
 
@@ -139,8 +132,7 @@ public class BookServiceTest extends ServiceTestBase{
         assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
-                book.getCourse(),
-                book.isUsed()));
+                book.getCourse()));
 
         assertNotNull(bookService.getBook(book.getTitle()));
     }
@@ -152,8 +144,7 @@ public class BookServiceTest extends ServiceTestBase{
         Long id = bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
-                book.getCourse(),
-                book.isUsed());
+                book.getCourse());
 
         assertEquals(id, bookService.getBook(book.getTitle()).getId());
     }
@@ -175,8 +166,7 @@ public class BookServiceTest extends ServiceTestBase{
         assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
-                book.getCourse(),
-                book.isUsed()));
+                book.getCourse()));
 
         assertTrue(bookService.deleteBook(book.getTitle()));
     }
@@ -222,8 +212,7 @@ public class BookServiceTest extends ServiceTestBase{
         assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
-                book.getCourse(),
-                book.isUsed()));
+                book.getCourse()));
 
         String userEmail = "me@me.com";
 
@@ -240,8 +229,7 @@ public class BookServiceTest extends ServiceTestBase{
         assertNotNull(bookService.createBook(
                 book.getTitle(),
                 book.getAuthor(),
-                book.getCourse(),
-                book.isUsed()));
+                book.getCourse()));
 
         String userEmail = "me@me.com";
 

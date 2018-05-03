@@ -26,9 +26,6 @@ public class Book {
     @Size(max = 128)
     private String author;
 
-    @NotNull
-    private boolean used;
-
     @NotBlank
     @Size(max = 128)
     private String course;
@@ -79,11 +76,4 @@ public class Book {
         this.users = users;
     }
 
-    public boolean isUsed() {
-        return used;
-    }
-
-    public void setUsed(boolean used) {
-        this.used = used;
-    }
 }

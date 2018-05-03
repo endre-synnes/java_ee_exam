@@ -20,8 +20,8 @@ public class DefaultDataInitializerService {
     public void initialize(){
         attempt(() -> userService.createUser("bar.barer@email.com", "foo","bar", "123",  false));
 
-        attempt(() -> bookService.createBook("Java EE", "Jhon Snow", "EnterPRISE 1", true));
-        attempt(() -> bookService.createBook("Algorithms", "Jhon Snow", "EnterPRISE 1", false));
+        attempt(() -> bookService.createBook("Java EE", "Jhon Snow", "EnterPRISE 1"));
+        attempt(() -> bookService.createBook("Algorithms", "Mike Tyson", "EnterPRISE 2"));
     }
 
     private <T> T attempt(Supplier<T> lambda){
