@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -28,14 +27,12 @@ public class BookController implements Serializable {
         return ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
     }
 
-    public String addSellerToBook(String bookTitle){
+    public void addSellerToBook(String bookTitle){
         bookService.addUserTooBook(getUerName(), bookTitle);
-        return "/index.jsf";
     }
 
-    public String removeSellerFromBook(String bookTitle){
+    public void removeSellerFromBook(String bookTitle){
         bookService.removeUserFromBook(getUerName(), bookTitle);
-        return "/index.jsf";
     }
 
     public boolean getIfUserInBookList(String bookTitle){
