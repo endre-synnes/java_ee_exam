@@ -29,9 +29,13 @@
             <c:if test="#{sellerList.size() != 0}">
                 <h:dataTable value="#{sellerList}" var="seller" border="1" id="sellerTable">
                     <h:column>
-                        <f:facet name="header">Sellers</f:facet>
+                        <f:facet name="header">Seller</f:facet>
+                        <h:outputLabel value="#{seller}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Send message</f:facet>
                         <h:form>
-                            <h:commandLink id="goToDetails" value="#{seller}" action="#{messageController.sendMessage(seller)}"/>
+                            <h:commandButton id="goToDetails" value="Send" action="#{messageController.sendMessage(seller)}" class="btn"/>
                         </h:form>
                     </h:column>
                 </h:dataTable>

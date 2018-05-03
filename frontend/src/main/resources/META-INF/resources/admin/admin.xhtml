@@ -22,13 +22,13 @@
             <h:form id="sellerForm" >
                 <h:panelGrid columns="1" id="sellerTable">
                     <h:outputLabel value="Book Title:"/>
-                    <h:inputText value="#{adminController.title}"/>
+                    <h:inputText value="#{adminController.title}" id="inputTitle"/>
                     <h:outputLabel value="Book Author:"/>
-                    <h:inputText value="#{adminController.author}"/>
+                    <h:inputText value="#{adminController.author}" id="inputAuthor"/>
                     <h:outputLabel value="Course:"/>
-                    <h:inputText value="#{adminController.course}"/>
+                    <h:inputText value="#{adminController.course}" id="inputCourse"/>
 
-                    <h:commandButton value="Create" action="#{adminController.createBook}" class="btn"/>
+                    <h:commandButton value="Create" action="#{adminController.createBook}" class="btn" id="createBookId"/>
                 </h:panelGrid>
             </h:form>
         </div>

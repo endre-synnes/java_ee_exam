@@ -19,7 +19,7 @@ public class IndexPO extends LayoutPO{
 
     //TODO: Check this if i change title in index page
     public boolean isOnPage() {
-        return getDriver().getTitle().contains("Title");
+        return getDriver().getTitle().contains("Home");
     }
 
 }

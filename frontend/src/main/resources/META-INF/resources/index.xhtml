@@ -10,13 +10,16 @@
 <ui:composition template="layout.xhtml">
 
     <ui:define name="title">
-        Title
+        Home
     </ui:define>
 
     <ui:define name="content">
 
-        <h2>Title here...</h2>
+        <h2>Welcome to School books application</h2>
 
+        <sec:anonymous>
+            You are not logged in, if you want to buy or sell a Book you need to login/register
+        </sec:anonymous>
 
 
         <c:set var="bookList" value="#{bookController.books}"/>
@@ -27,7 +30,7 @@
                     <h:column>
                         <f:facet name="header">Title</f:facet>
                         <h:form>
-                            <h:commandLink id="goToDetails" value="#{book.title}" action="#{bookController.goToDetails(book.title)}"/>
+                            <h:commandLink id="goToDetailsId" value="#{book.title}" action="#{bookController.goToDetails(book.title)}"/>
                         </h:form>
                     </h:column>
                     <h:column>
@@ -47,12 +50,12 @@
                             <f:facet name="header">Sell</f:facet>
                             <c:when test="#{!bookController.getIfUserInBookList(book.title)}">
                                 <h:form>
-                                    <h:commandButton id="idAddUserToBook" value="Sell this book" action="#{bookController.addSellerToBook(book.title)}" class="btn"/>
+                                    <h:commandButton id="idAddUserToBookId" value="Sell this book" action="#{bookController.addSellerToBook(book.title)}" class="btn"/>
                                 </h:form>
                             </c:when>
                             <c:otherwise>
                                 <h:form>
-                                    <h:commandButton id="idRemoveUserFromBook" value="Not Selling this book" action="#{bookController.removeSellerFromBook(book.title)}" class="btn"/>
+                                    <h:commandButton id="idRemoveUserFromBookId" value="Not Selling this book" action="#{bookController.removeSellerFromBook(book.title)}" class="btn"/>
                                 </h:form>
                             </c:otherwise>
                         </h:column>
@@ -61,11 +64,6 @@
             </c:if>
 
         </div>
-
-
-        <sec:anonymous>
-            You are not logged in.
-        </sec:anonymous>
 
     </ui:define>
 
