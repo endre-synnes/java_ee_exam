@@ -4,7 +4,7 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:sec="http://www.springframework.org/security/tags"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 
 <ui:composition template="../layout.xhtml">
@@ -15,11 +15,12 @@
 
     <ui:define name="content">
 
-        <h2>Welcome to the Admin page</h2>
-
+        <div class="bookDetails">
+            <h2>Welcome to the Admin page</h2>
+        </div>
         <div class="bookDiv">
-            <h:form id="formCreateBook">
-                <h:panelGrid columns="1" id="gridBook">
+            <h:form id="sellerForm" >
+                <h:panelGrid columns="1" id="sellerTable">
                     <h:outputLabel value="Book Title:"/>
                     <h:inputText value="#{adminController.title}"/>
                     <h:outputLabel value="Book Author:"/>
@@ -27,11 +28,40 @@
                     <h:outputLabel value="Course:"/>
                     <h:inputText value="#{adminController.course}"/>
 
-                    <h:commandButton value="Create" action="#{adminController.createBook}"/>
+                    <h:commandButton value="Create" action="#{adminController.createBook}" class="btn"/>
                 </h:panelGrid>
             </h:form>
         </div>
 
+        <br/>
+        <br/>
+        <br/>
+
+        <c:set var="bookList" value="#{adminController.books}"/>
+
+        <h3>Manage Books</h3>
+
+        <div class="bookDiv">
+            <c:if test="#{bookList.size() != 0}">
+                <h:dataTable value="#{bookList}" var="book" border="1" id="bookTable">
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                        <h:outputLabel value="#{book.title}" class="bookTitle"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Number of serllers</f:facet>
+                        <h:outputLabel value="#{book.users.size()}" class="bookTitle"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Delete Book</f:facet>
+                        <h:form>
+                            <h:commandButton id="deleteBookId" value="Delete" action="#{adminController.deleteBook(book.title)}" class="btn"/>
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+            </c:if>
+
+        </div>
 
 
 

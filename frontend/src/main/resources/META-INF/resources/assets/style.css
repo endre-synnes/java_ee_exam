@@ -15,30 +15,24 @@ a:visited{
     width: 100%;
     display: block;
 }
+
 #bookTable{
     position: relative;
     width: 80%;
     margin: 0 auto;
 }
 
+#sellerForm{
+    width: 10%;
+    margin: 0 auto;
+    position: relative;
+}
+
 #sellerTable{
-    position: relative;
-    width: 80%;
-    margin: 0 auto;
+
 }
 
-#formCreateBook{
-    display: block;
-    position: relative;
-    width: 40%;
-    margin: 0 auto;
-}
 
-#gridBook{
-    position: relative;
-    width: 40%;
-    margin: 0 auto;
-}
 
 .btn{
     border: 1px solid rgb(30,30,30);
