@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:sec="http://www.springframework.org/security/tags"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
+<ui:composition template="../layout.xhtml">
+
+    <ui:define name="title">
+        Send Message
+    </ui:define>
+
+    <ui:define name="content">
+
+        <div class="bookDetails">
+            <h2>Send message to the owner of this book</h2>
+        </div>
+        <div class="bookDiv">
+            <h:form id="sellerForm" >
+                <h:panelGrid columns="2" id="sellerTable">
+                    <h:outputLabel value="Receiver:"/>
+                    <h:outputLabel value="#{messageController.receiver}" id="displayReceiver"/>
+                    <h:outputLabel value="Message:"/>
+                    <h:inputText value="#{messageController.message}" id="inputMessage"/>
+                </h:panelGrid>
+                <h:commandButton value="Send" action="#{messageController.sendMessage}" class="btn" id="sendMessageId"/>
+                <br/>
+
+                <h2>
+                    <h:outputLabel value="#{messageController.messageSent}"/>
+                </h2>
+            </h:form>
+        </div>
+
+
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

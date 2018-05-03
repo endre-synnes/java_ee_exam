@@ -16,6 +16,7 @@ public class DefaultDataInitializerService {
     @Autowired
     private BookService bookService;
 
+
     @PostConstruct
     public void initialize(){
         attempt(() -> userService.createUser("bar.barer@email.com", "foo","bar", "123",  false));
@@ -23,6 +24,8 @@ public class DefaultDataInitializerService {
 
         attempt(() -> bookService.createBook("Java EE", "John Snow", "Enterprise 1"));
         attempt(() -> bookService.createBook("Algorithms", "Mike Tyson", "Enterprise 2"));
+
+        attempt(() -> bookService.addUserTooBook("admin@mail.com", "Java EE"));
     }
 
     private <T> T attempt(Supplier<T> lambda){
