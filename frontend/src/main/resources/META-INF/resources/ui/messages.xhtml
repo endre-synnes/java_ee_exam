@@ -40,7 +40,9 @@
                     </h:column>
                 </h:dataTable>
             </c:if>
-
+            <c:if test="#{receivedMessagesList.size() == 0}">
+                <p>No Received Messages</p>
+            </c:if>
         </div>
 
         <h2>Sent messages</h2>
@@ -64,7 +66,9 @@
                     </h:column>
                 </h:dataTable>
             </c:if>
-
+            <c:if test="#{sentMessagesList.size() == 0}">
+                <p>No Sent Messages</p>
+            </c:if>
         </div>
 
     </ui:define>

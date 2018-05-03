@@ -26,6 +26,11 @@ public class MessageController implements Serializable {
 
     private String messageSent;
 
+    private List<Message> receivedMessages;
+
+    private List<Message> sentMessages;
+
+
 
     public String toSendMessage(String receiver){
         this.receiver = receiver;
@@ -43,14 +48,16 @@ public class MessageController implements Serializable {
         message = "";
         messageSent = "Message sent!";
     }
-    
+
 
     public List<Message> getReceivedMessages(){
-        return messageService.getReceivedMessages(userInfoController.getUserName());
+        receivedMessages = messageService.getReceivedMessages(userInfoController.getUserName());
+        return receivedMessages;
     }
 
     public List<Message> getSentMessages(){
-        return messageService.getSentMessages(userInfoController.getUserName());
+        sentMessages = messageService.getSentMessages(userInfoController.getUserName());
+        return sentMessages;
     }
 
     public String getReceiver() {
