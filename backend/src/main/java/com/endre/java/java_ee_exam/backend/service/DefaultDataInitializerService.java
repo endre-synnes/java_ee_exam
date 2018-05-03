@@ -19,9 +19,10 @@ public class DefaultDataInitializerService {
     @PostConstruct
     public void initialize(){
         attempt(() -> userService.createUser("bar.barer@email.com", "foo","bar", "123",  false));
+        attempt(() -> userService.createUser("admin@mail.com","admin", "admin", "123", true));
 
-        attempt(() -> bookService.createBook("Java EE", "Jhon Snow", "EnterPRISE 1"));
-        attempt(() -> bookService.createBook("Algorithms", "Mike Tyson", "EnterPRISE 2"));
+        attempt(() -> bookService.createBook("Java EE", "John Snow", "Enterprise 1"));
+        attempt(() -> bookService.createBook("Algorithms", "Mike Tyson", "Enterprise 2"));
     }
 
     private <T> T attempt(Supplier<T> lambda){

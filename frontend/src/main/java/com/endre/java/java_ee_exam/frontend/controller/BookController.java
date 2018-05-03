@@ -46,7 +46,7 @@ public class BookController implements Serializable {
     public String goToDetails(String bookTitle){
         bookObject = bookService.getBook(bookTitle);
         sellers = bookObject.getUsers();
-        return "/ui/bookDetail.jsf?faces-redirect=true";
+        return "/bookDetail.jsf?faces-redirect=true";
     }
 
     public Book getBookObject() {
