@@ -17,12 +17,23 @@
 
         <h2>Welcome to the Admin page</h2>
 
-        <sec:authenticated>
-            You are logged in this is the Admin page
-        </sec:authenticated>
-        <sec:anonymous>
-            You are not logged in.
-        </sec:anonymous>
+        <div class="bookDiv">
+            <h:form id="formCreateBook">
+                <h:panelGrid columns="1" id="gridBook">
+                    <h:outputLabel value="Book Title:"/>
+                    <h:inputText value="#{adminController.title}"/>
+                    <h:outputLabel value="Book Author:"/>
+                    <h:inputText value="#{adminController.author}"/>
+                    <h:outputLabel value="Course:"/>
+                    <h:inputText value="#{adminController.course}"/>
+
+                    <h:commandButton value="Create" action="#{adminController.createBook}"/>
+                </h:panelGrid>
+            </h:form>
+        </div>
+
+
+
 
     </ui:define>
 
