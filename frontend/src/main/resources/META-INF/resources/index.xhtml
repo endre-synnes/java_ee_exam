@@ -46,18 +46,18 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Number of serllers</f:facet>
-                        <h:outputLabel value="#{book.users.size()}" class="bookSellers"/>
+                        <h:outputLabel value="#{book.users.size()}" class="bookSellers" id="numberOfSellers"/>
                     </h:column>
                     <sec:authenticated>
                         <h:column>
                             <f:facet name="header">Sell</f:facet>
                             <c:when test="#{!bookController.getIfUserInBookList(book.title)}">
-                                <h:form>
+                                <h:form prependId="false">
                                     <h:commandButton id="idAddUserToBookId" value="Sell this book" action="#{bookController.addSellerToBook(book.title)}" class="btn"/>
                                 </h:form>
                             </c:when>
                             <c:otherwise>
-                                <h:form>
+                                <h:form prependId="false">
                                     <h:commandButton id="idRemoveUserFromBookId" value="Not Selling this book" action="#{bookController.removeSellerFromBook(book.title)}" class="btn"/>
                                 </h:form>
                             </c:otherwise>

@@ -60,4 +60,19 @@ public class IndexPO extends LayoutPO{
         return elements.size();
     }
 
+
+    public void markSellBook(){
+        getDriver().findElement(By.xpath("//INPUT[@id='allBooksTable:0:idAddUserToBookId']")).click();
+        waitForPageToLoad();
+    }
+
+    public void unmarkSellBook(){
+        getDriver().findElement(By.xpath("//INPUT[@id='allBooksTable:0:idRemoveUserFromBookId']")).click();
+        waitForPageToLoad();
+    }
+
+    public String getNumberOfSellers(int row){
+        return getDriver().findElement(By.xpath("//LABEL[@id='allBooksTable:"+row+":numberOfSellers']")).getText();
+    }
+
 }

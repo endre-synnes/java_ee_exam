@@ -125,7 +125,7 @@ public abstract class SeleniumTestBase {
 
 
     @Test
-    public void verifyTwoBooksInTable() {
+    public void testDefaultBooks() {
         assertFalse(home.isLoggedIn());
         home.toStartPage();
 
@@ -133,7 +133,7 @@ public abstract class SeleniumTestBase {
     }
 
     @Test
-    public void verifyCanNotSellIfNotLoggedIn() {
+    public void testRegisterSellingNotAllowed() {
         assertFalse(home.isLoggedIn());
         home.toStartPage();
 
@@ -148,5 +148,58 @@ public abstract class SeleniumTestBase {
         assertTrue(home.isLoggedIn());
 
         assertEquals(5, home.getNumberOfColumnsToSeeIfSellColumnIsMissing());
+    }
+
+
+    @Test
+    public void testRegisterSelling() {
+        String email = getUniqueId();
+        String firtname = "foo";
+        String surname = "bar";
+        String password = "12345678";
+        home = createNewUser(email, firtname, surname, password, false);
+
+        assertTrue(home.isLoggedIn());
+
+        int before = Integer.valueOf(home.getNumberOfSellers(0));
+        int otherBefore = Integer.valueOf(home.getNumberOfSellers(1));
+
+        //Marking
+        home.markSellBook();
+
+        int incensed = Integer.valueOf(home.getNumberOfSellers(0));
+        int otherNotIncreased = Integer.valueOf(home.getNumberOfSellers(1));
+
+
+        assertTrue(incensed > before);
+        assertEquals(otherBefore, otherNotIncreased);
+
+        //Un marking
+        home.unmarkSellBook();
+
+        int backToBefore = Integer.valueOf(home.getNumberOfSellers(0));
+
+        assertEquals(before, backToBefore);
+
+        //Marking it again
+        home.markSellBook();
+
+        int backToIncreased = Integer.valueOf(home.getNumberOfSellers(0));
+
+        assertTrue(backToIncreased > backToBefore);
+
+        home.doLogout();
+        home.toStartPage();
+        assertFalse(home.isLoggedIn());
+
+        backToIncreased = Integer.valueOf(home.getNumberOfSellers(0));
+
+        assertTrue(backToIncreased > before);
+    }
+
+
+    @Test
+    public void testBookDetails() {
+
     }
 }
