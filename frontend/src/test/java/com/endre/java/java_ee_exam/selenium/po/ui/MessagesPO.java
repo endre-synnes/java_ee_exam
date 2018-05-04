@@ -30,7 +30,7 @@ public class MessagesPO extends LayoutPO {
     }
 
     public String receivedMessageSender(int message){
-        return getDriver().findElement(By.xpath("//LABEL[@id='receivedMessagesTable:"+message+":text']")).getText();
+        return getDriver().findElement(By.xpath("//LABEL[@id='receivedMessagesTable:"+message+":sender']")).getText();
     }
 
     public String receivedMessageTime(int message){

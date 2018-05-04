@@ -138,7 +138,7 @@
                     <artifactId>heroku-maven-plugin</artifactId>
                     <version>2.0.2</version>
                     <configuration>
-                        <appName>java_ee_exam_heroku</appName>
+                        <appName>schoolbooks</appName>
                         <includeTarget>false</includeTarget>
                         <includes>
                             <include>target/java_ee_exam-exec.jar</include>

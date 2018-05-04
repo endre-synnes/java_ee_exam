@@ -27,6 +27,7 @@ public abstract class SeleniumTestBase {
     private static final AtomicInteger counter = new AtomicInteger(0);
 
     private String getUniqueId(){return "email_seleniumTest_" + counter.getAndIncrement() + "@me.com";}
+    private String getUniqueTitle(){return "Book_" + counter.getAndIncrement() + "";}
 
     private IndexPO home;
 
@@ -131,7 +132,7 @@ public abstract class SeleniumTestBase {
         assertFalse(home.isLoggedIn());
         home.toStartPage();
 
-        assertEquals(3, home.getNumberOfDisplayedBooks());
+        assertTrue(home.getNumberOfDisplayedBooks() > 1);
     }
 
     @Test
@@ -280,6 +281,7 @@ public abstract class SeleniumTestBase {
         String testMessageTwo = messagesPO.receivedMessageText(1);
         assertEquals(anotherMessage, testMessageOne);
         assertEquals(message, testMessageTwo);
+        assertEquals(messagesPO.receivedMessageSender(0), emailUserTwo);
 
         String replyMessage = "hello to you too!";
         sendMessagePO = messagesPO.replyToMessage(0);
@@ -295,5 +297,20 @@ public abstract class SeleniumTestBase {
         messagesPO = home.goToMessages();
         String receivedMessage = messagesPO.receivedMessageText(0);
         assertEquals(receivedMessage, receivedMessage);
+    }
+
+
+    @Test
+    public void testAdminCreateAndDeleteBook() {
+        String email = "admin@mail.com";
+
+        LoginPO loginPO = home.toLogin();
+        home = loginPO.logInUser(email, "123");
+        assertTrue(home.isLoggedIn());
+
+        AdminPO adminPO = home.goToAdmin();
+        adminPO.createBook(getUniqueTitle());
+
+        adminPO.deleteBook(0);
     }
 }
