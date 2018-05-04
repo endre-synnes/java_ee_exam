@@ -131,4 +131,22 @@ public abstract class SeleniumTestBase {
 
         assertEquals(2, home.getNumberOfDisplayedBooks());
     }
+
+    @Test
+    public void verifyCanNotSellIfNotLoggedIn() {
+        assertFalse(home.isLoggedIn());
+        home.toStartPage();
+
+        assertEquals(4, home.getNumberOfColumnsToSeeIfSellColumnIsMissing());
+
+        String email = getUniqueId();
+        String firtname = "foo";
+        String surname = "bar";
+        String password = "12345678";
+        home = createNewUser(email, firtname, surname, password, false);
+
+        assertTrue(home.isLoggedIn());
+
+        assertEquals(5, home.getNumberOfColumnsToSeeIfSellColumnIsMissing());
+    }
 }

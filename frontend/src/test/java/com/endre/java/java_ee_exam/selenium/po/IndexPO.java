@@ -50,4 +50,14 @@ public class IndexPO extends LayoutPO{
         return elements.size();
     }
 
+
+    public int getNumberOfColumnsToSeeIfSellColumnIsMissing(){
+        List<WebElement> elements = new ArrayList<>();
+        try{
+            elements = driver.findElements(
+                    By.xpath("//table[@id='allBooksTable']//tbody//tr[1]//td"));
+        }catch (NoSuchElementException e){}
+        return elements.size();
+    }
+
 }
