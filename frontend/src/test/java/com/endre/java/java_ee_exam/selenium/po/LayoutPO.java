@@ -2,9 +2,11 @@ package com.endre.java.java_ee_exam.selenium.po;
 
 import com.endre.java.java_ee_exam.selenium.PageObject;
 import com.endre.java.java_ee_exam.selenium.po.admin.AdminPO;
+import com.endre.java.java_ee_exam.selenium.po.ui.MessagesPO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public abstract class LayoutPO extends PageObject {
@@ -51,6 +53,35 @@ public abstract class LayoutPO extends PageObject {
         clickAndWait("logoutId");
 
         IndexPO po = new IndexPO(this);
+        assertTrue(po.isOnPage());
+
+        return po;
+    }
+
+    public MessagesPO goToMessages(){
+        clickAndWait("linkToMessagesId");
+
+        MessagesPO po = new MessagesPO(this);
+        assertTrue(po.isOnPage());
+
+        return po;
+    }
+
+    public IndexPO goToHomeLoggedIn(){
+        clickAndWait("linkToHomeId");
+
+        IndexPO po = new IndexPO(this);
+        assertTrue(po.isLoggedIn());
+        assertTrue(po.isOnPage());
+
+        return po;
+    }
+
+    public IndexPO goToHomeNotLoggedIn(){
+        clickAndWait("linkToHomeNotLoggedIn");
+
+        IndexPO po = new IndexPO(this);
+        assertFalse(po.isLoggedIn());
         assertTrue(po.isOnPage());
 
         return po;
