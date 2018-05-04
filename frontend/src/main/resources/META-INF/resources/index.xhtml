@@ -4,7 +4,10 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:sec="http://www.springframework.org/security/tags"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+
 >
 
 <ui:composition template="layout.xhtml">
@@ -26,11 +29,11 @@
 
         <div class="bookDiv">
             <c:if test="#{bookList.size() != 0}">
-                <h:dataTable value="#{bookList}" var="book" border="1" class="bookTable">
-                    <h:column>
+                <h:dataTable value="#{bookList}" var="book" border="1" class="bookTable" id="allBooksTable">
+                    <h:column id="title">
                         <f:facet name="header">Title</f:facet>
-                        <h:form>
-                            <h:commandLink id="goToDetailsId" value="#{book.title}" action="#{bookController.goToDetails(book.title)}"/>
+                        <h:form id="titleForm">
+                            <h:commandLink p:data-bookid = "#{book.id}" id="goToDetailsId" value="#{book.title}" action="#{bookController.goToDetails(book.title)}"/>
                         </h:form>
                     </h:column>
                     <h:column>

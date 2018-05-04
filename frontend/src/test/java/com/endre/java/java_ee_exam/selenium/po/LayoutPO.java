@@ -4,7 +4,12 @@ import com.endre.java.java_ee_exam.selenium.PageObject;
 import com.endre.java.java_ee_exam.selenium.po.admin.AdminPO;
 import com.endre.java.java_ee_exam.selenium.po.ui.MessagesPO;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -92,4 +97,5 @@ public abstract class LayoutPO extends PageObject {
         return getDriver().findElements(By.id("logoutId")).size() > 0 &&
                 getDriver().findElements(By.id("linkToSignUpId")).isEmpty();
     }
+
 }

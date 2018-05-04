@@ -1,5 +1,6 @@
 package com.endre.java.java_ee_exam.selenium;
 
+import com.endre.java.java_ee_exam.selenium.po.BookDetailPO;
 import com.endre.java.java_ee_exam.selenium.po.IndexPO;
 import com.endre.java.java_ee_exam.selenium.po.LoginPO;
 import com.endre.java.java_ee_exam.selenium.po.SignUpPO;
@@ -82,26 +83,6 @@ public abstract class SeleniumTestBase {
         assertTrue(adminPO.isOnPage());
     }
 
-//    @Test
-//    public void testCreateUserLogOutAndLogIn() {
-//        assertFalse(home.isLoggedIn());
-//
-//        String email = getUniqueId();
-//        String firtname = "foo";
-//        String surname = "bar";
-//        String password = "12345678";
-//        home = createNewUser(email, firtname, surname, password, false);
-//
-//        assertTrue(home.isLoggedIn());
-//        home = home.doLogout();
-//
-//        home.toStartPage();
-//        LoginPO loginPO = home.toLogin();
-//        home = loginPO.logInUser(firtname, password);
-//
-//        assertTrue(home.isLoggedIn());
-//    }
-
 
     @Test
     public void testSignUpWithNullValue() {
@@ -129,5 +110,25 @@ public abstract class SeleniumTestBase {
         LoginPO loginPO = home.toLogin();
 
         assertNull(loginPO.logInUser(getUniqueId(), "123"));
+    }
+
+
+    @Test
+    public void testGoToDetailsPage() {
+        assertFalse(home.isLoggedIn());
+        home.toStartPage();
+
+        BookDetailPO po =home.goToDetailsPage();
+        assertTrue(po.isOnPage());
+
+    }
+
+
+    @Test
+    public void verifyTwoBooksInTable() {
+        assertFalse(home.isLoggedIn());
+        home.toStartPage();
+
+        assertEquals(2, home.getNumberOfDisplayedBooks());
     }
 }
