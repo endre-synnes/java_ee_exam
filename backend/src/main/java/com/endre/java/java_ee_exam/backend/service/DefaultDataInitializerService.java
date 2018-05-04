@@ -24,6 +24,7 @@ public class DefaultDataInitializerService {
 
         attempt(() -> bookService.createBook("Java EE", "John Snow", "Enterprise 1"));
         attempt(() -> bookService.createBook("Algorithms", "Mike Tyson", "Enterprise 2"));
+        attempt(() -> bookService.createBook("Clean Code", "Kim Johnson", "Enterprise 2"));
 
         attempt(() -> bookService.addUserTooBook("admin@mail.com", "Java EE"));
     }

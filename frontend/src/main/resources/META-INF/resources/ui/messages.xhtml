@@ -19,22 +19,22 @@
 
         <div class="bookDiv">
             <c:if test="#{receivedMessagesList.size() != 0}">
-                <h:dataTable value="#{receivedMessagesList}" var="receivedMessage" border="1" class="bookTable">
+                <h:dataTable value="#{receivedMessagesList}" var="receivedMessage" border="1" class="bookTable" id="receivedMessagesTable">
                     <h:column>
                         <f:facet name="header">Time</f:facet>
-                        <h:outputLabel value="#{receivedMessage.date}"/>
+                        <h:outputLabel value="#{receivedMessage.date}" id="time"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Sender</f:facet>
-                        <h:outputLabel value="#{receivedMessage.sender}"/>
+                        <h:outputLabel value="#{receivedMessage.sender}" id="sender"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Text</f:facet>
-                        <h:outputLabel value="#{receivedMessage.text}"/>
+                        <h:outputLabel value="#{receivedMessage.text}" id="text"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Reply</f:facet>
-                        <h:form>
+                        <h:form prependId="false">
                             <h:commandButton id="replyToMessageId" value="Reply" action="#{messageController.toSendMessage(receivedMessage.sender)}" class="btn"/>
                         </h:form>
                     </h:column>
@@ -51,18 +51,18 @@
 
         <div class="bookDiv">
             <c:if test="#{sentMessagesList.size() != 0}">
-                <h:dataTable value="#{sentMessagesList}" var="sentMessage" border="1" class="bookTable">
+                <h:dataTable value="#{sentMessagesList}" var="sentMessage" border="1" class="bookTable" id="sentMessagesTable">
                     <h:column>
                         <f:facet name="header">Time</f:facet>
-                        <h:outputLabel value="#{sentMessage.date}"/>
+                        <h:outputLabel value="#{sentMessage.date}" id="timeSent"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Receiver</f:facet>
-                        <h:outputLabel value="#{sentMessage.receiver}"/>
+                        <h:outputLabel value="#{sentMessage.receiver}" id="receiverSent"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Text</f:facet>
-                        <h:outputLabel value="#{sentMessage.text}"/>
+                        <h:outputLabel value="#{sentMessage.text}" id="textSent"/>
                     </h:column>
                 </h:dataTable>
             </c:if>

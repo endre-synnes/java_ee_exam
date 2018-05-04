@@ -31,8 +31,8 @@ public class IndexPO extends LayoutPO{
     }
 
 
-    public BookDetailPO goToDetailsPage(){
-        getDriver().findElement(By.xpath("//A[@id='allBooksTable:0:titleForm:goToDetailsId']")).click();
+    public BookDetailPO goToDetailsPage(int row){
+        getDriver().findElement(By.xpath("//A[@id='allBooksTable:"+row+":titleForm:goToDetailsId']")).click();
         waitForPageToLoad();
 
         BookDetailPO po = new BookDetailPO(this);
@@ -61,13 +61,13 @@ public class IndexPO extends LayoutPO{
     }
 
 
-    public void markSellBook(){
-        getDriver().findElement(By.xpath("//INPUT[@id='allBooksTable:0:idAddUserToBookId']")).click();
+    public void markSellBook(int row){
+        getDriver().findElement(By.xpath("//INPUT[@id='allBooksTable:"+row+":idAddUserToBookId']")).click();
         waitForPageToLoad();
     }
 
-    public void unmarkSellBook(){
-        getDriver().findElement(By.xpath("//INPUT[@id='allBooksTable:0:idRemoveUserFromBookId']")).click();
+    public void unmarkSellBook(int row){
+        getDriver().findElement(By.xpath("//INPUT[@id='allBooksTable:"+row+":idRemoveUserFromBookId']")).click();
         waitForPageToLoad();
     }
 

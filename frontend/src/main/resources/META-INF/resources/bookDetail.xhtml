@@ -27,15 +27,15 @@
 
         <div class="bookDiv">
             <c:if test="#{sellerList.size() != 0}">
-                <h:dataTable value="#{sellerList}" var="seller" border="1" class="bookTable">
+                <h:dataTable value="#{sellerList}" var="seller" border="1" class="bookTable" id="sellerListTable">
                     <h:column>
                         <f:facet name="header">Seller</f:facet>
-                        <h:outputLabel value="#{seller}"/>
+                        <h:outputLabel value="#{seller}" id="sellerId"/>
                     </h:column>
                     <sec:authenticated>
                     <h:column>
                         <f:facet name="header">Send message</f:facet>
-                        <h:form>
+                        <h:form prependId="false">
                             <h:commandButton id="goToSendMessageId" value="Send" action="#{messageController.toSendMessage(seller)}" class="btn"/>
                         </h:form>
                     </h:column>

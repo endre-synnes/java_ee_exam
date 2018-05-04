@@ -5,6 +5,8 @@ import com.endre.java.java_ee_exam.selenium.po.IndexPO;
 import com.endre.java.java_ee_exam.selenium.po.LoginPO;
 import com.endre.java.java_ee_exam.selenium.po.SignUpPO;
 import com.endre.java.java_ee_exam.selenium.po.admin.AdminPO;
+import com.endre.java.java_ee_exam.selenium.po.ui.MessagesPO;
+import com.endre.java.java_ee_exam.selenium.po.ui.SendMessagePO;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -118,7 +120,7 @@ public abstract class SeleniumTestBase {
         assertFalse(home.isLoggedIn());
         home.toStartPage();
 
-        BookDetailPO po =home.goToDetailsPage();
+        BookDetailPO po =home.goToDetailsPage(0);
         assertTrue(po.isOnPage());
 
     }
@@ -129,7 +131,7 @@ public abstract class SeleniumTestBase {
         assertFalse(home.isLoggedIn());
         home.toStartPage();
 
-        assertEquals(2, home.getNumberOfDisplayedBooks());
+        assertEquals(3, home.getNumberOfDisplayedBooks());
     }
 
     @Test
@@ -165,7 +167,7 @@ public abstract class SeleniumTestBase {
         int otherBefore = Integer.valueOf(home.getNumberOfSellers(1));
 
         //Marking
-        home.markSellBook();
+        home.markSellBook(0);
 
         int incensed = Integer.valueOf(home.getNumberOfSellers(0));
         int otherNotIncreased = Integer.valueOf(home.getNumberOfSellers(1));
@@ -175,14 +177,14 @@ public abstract class SeleniumTestBase {
         assertEquals(otherBefore, otherNotIncreased);
 
         //Un marking
-        home.unmarkSellBook();
+        home.unmarkSellBook(0);
 
         int backToBefore = Integer.valueOf(home.getNumberOfSellers(0));
 
         assertEquals(before, backToBefore);
 
         //Marking it again
-        home.markSellBook();
+        home.markSellBook(0);
 
         int backToIncreased = Integer.valueOf(home.getNumberOfSellers(0));
 
@@ -200,6 +202,98 @@ public abstract class SeleniumTestBase {
 
     @Test
     public void testBookDetails() {
+        String emailUserOne = getUniqueId();
+        String firtname = "foo";
+        String surname = "bar";
+        String password = "12345678";
+        home = createNewUser(emailUserOne, firtname, surname, password, false);
 
+        String emailUserTwo = "admin@mail.com";
+
+        assertTrue(home.isLoggedIn());
+
+        home.markSellBook(1);
+
+        BookDetailPO bookDetailPO = home.goToDetailsPage(1);
+
+        String testEmailUserOne = bookDetailPO.getSellerEmail();
+
+        assertEquals(emailUserOne, testEmailUserOne);
+
+        home = bookDetailPO.doLogout();
+        assertFalse(home.isLoggedIn());
+        home.toStartPage();
+
+        LoginPO loginPO = home.toLogin();
+        home = loginPO.logInUser(emailUserTwo, "123");
+
+        assertTrue(home.isLoggedIn());
+
+        bookDetailPO = home.goToDetailsPage(1);
+        testEmailUserOne = bookDetailPO.getSellerEmail();
+
+        assertEquals(emailUserOne, testEmailUserOne);
+    }
+
+
+    @Test
+    public void testMessages() {
+        String emailUserOne = "admin@mail.com";
+
+        LoginPO loginPO = home.toLogin();
+        home = loginPO.logInUser(emailUserOne, "123");
+        assertTrue(home.isLoggedIn());
+
+        home.markSellBook(2);
+        home = home.doLogout();
+
+
+        String emailUserTwo = getUniqueId();
+        String firtname = "foo";
+        String surname = "bar";
+        String password = "123";
+        home = createNewUser(emailUserTwo, firtname, surname, password, false);
+
+        assertTrue(home.isLoggedIn());
+
+        BookDetailPO bookDetailPO = home.goToDetailsPage(2);
+
+        SendMessagePO sendMessagePO = bookDetailPO.toSendMessagePage();
+        assertTrue(sendMessagePO.isOnPage());
+
+        String message = "hello";
+        String anotherMessage = "are you there?";
+        sendMessagePO.sendMessage(message);
+        sendMessagePO.sendMessage(anotherMessage);
+
+        home = home.doLogout();
+
+
+        loginPO = home.toLogin();
+        home = loginPO.logInUser(emailUserOne, "123");
+        assertTrue(home.isLoggedIn());
+
+        MessagesPO messagesPO = home.goToMessages();
+
+        //Getting messages in the right order
+        String testMessageOne = messagesPO.receivedMessageText(0);
+        String testMessageTwo = messagesPO.receivedMessageText(1);
+        assertEquals(anotherMessage, testMessageOne);
+        assertEquals(message, testMessageTwo);
+
+        String replyMessage = "hello to you too!";
+        sendMessagePO = messagesPO.replyToMessage(0);
+        sendMessagePO.sendMessage(replyMessage);
+
+        home = home.goToHomeLoggedIn();
+        home = home.doLogout();
+
+        loginPO = home.toLogin();
+        home = loginPO.logInUser(emailUserTwo, "123");
+        assertNotNull(home);
+
+        messagesPO = home.goToMessages();
+        String receivedMessage = messagesPO.receivedMessageText(0);
+        assertEquals(receivedMessage, receivedMessage);
     }
 }

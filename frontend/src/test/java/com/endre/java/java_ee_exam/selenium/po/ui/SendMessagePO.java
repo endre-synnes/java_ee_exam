@@ -19,4 +19,10 @@ public class SendMessagePO extends LayoutPO {
     public boolean isOnPage() {
         return getDriver().getTitle().contains("Send Message");
     }
+
+
+    public void sendMessage(String message){
+        setText("sellerForm:inputMessage", message);
+        clickAndWait("sellerForm:sendMessageId");
+    }
 }
