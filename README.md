@@ -1,16 +1,18 @@
+# Java Enterprice Exam 48 hours
+
+In this exam we where given the task of creating an used book store. Where students can sell or buy uesd books from each other.
+
+Students can mark books if they have them and want so sell these books. Buyers can then click on a book and start a conversation with one of the sellers (Both buyer and seller have to be authenticated).
+
 
 <!--- Travis CI build status banner -->
 [![Build Status](https://travis-ci.org/synend16/java_ee_exam.svg?branch=master)](https://travis-ci.org/synend16/java_ee_exam)
 
-Description:
-
-In my application I have created all the selenium tests you asked for. I have also implementet all funtionality you asked for
-in both services and controllers.
+### Facts:
 
 I have an total of 94% code coverage.
 
-
-
+### How to run the application
 To Run my application localy run class: LocalApplicationRunner
 
 To Run all tests type: mvn clean verify in root folder.
@@ -29,9 +31,9 @@ Backend:
 
 Frontend:
 
-- In the front end I have created all the selenium tests you asked for,
-  but if I had more time i would have created som more dynamically tests.
+- The front end is made using JSF. 
 
+- I have implemented spring security so that some pages require you to be logged in or even be an admin.
 
 Extra functionality:
 
