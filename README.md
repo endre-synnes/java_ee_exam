@@ -8,9 +8,17 @@ Students can mark books if they have them and want so sell these books. Buyers c
 <!--- Travis CI build status banner -->
 [![Build Status](https://travis-ci.org/synend16/java_ee_exam.svg?branch=master)](https://travis-ci.org/synend16/java_ee_exam)
 
-### Facts:
+### Code cuality
 
-I have an total of 94% code coverage.
+Code coverage:
+  - I have an total of 94% code coverage.
+
+Test:
+  - Selenium Tests
+  - Unit Tests
+  - Integration Tests
+  
+  
 
 ### How to run the application
 To Run my application localy run class: LocalApplicationRunner
@@ -18,7 +26,7 @@ To Run my application localy run class: LocalApplicationRunner
 To Run all tests type: mvn clean verify in root folder.
 
 
-Backend:
+## Backend:
 
 - I Have implemented functionality to delete books as well as creating new ones.
 
@@ -29,13 +37,13 @@ Backend:
 
 
 
-Frontend:
+## Frontend:
 
 - The front end is made using JSF. 
 
 - I have implemented spring security so that some pages require you to be logged in or even be an admin.
 
-Extra functionality:
+## Extra functionality:
 
 - I Have added functionality for ADMIN users. A user can register as an admin and will then get access to an admin page.
 
