@@ -2,11 +2,26 @@
 
 In this exam we where given the task of creating an used book store. Where students can sell or buy uesd books from each other.
 
+This should be a fully working application with an clickable user interface.
+
 Students can mark books if they have them and want so sell these books. Buyers can then click on a book and start a conversation with one of the sellers (Both buyer and seller have to be authenticated).
 
 
 <!--- Travis CI build status banner -->
 [![Build Status](https://travis-ci.org/synend16/java_ee_exam.svg?branch=master)](https://travis-ci.org/synend16/java_ee_exam)
+
+### Link to live application at Heroku
+
+https://schoolbooks.herokuapp.com/
+
+
+### How to run the application
+
+To Run my application localy run class: LocalApplicationRunner
+
+To Run all tests type this in the root folder: mvn clean verify
+
+
 
 ### Code cuality
 
@@ -19,11 +34,15 @@ Test:
   - Integration Tests
   
   
-
-### How to run the application
-To Run my application localy run class: LocalApplicationRunner
-
-To Run all tests type: mvn clean verify in root folder.
+  
+ ### Tecnologies used
+ 
+  - SpringBoot
+  - JPA
+  - H2 (database for testing)
+  - Postgres (database for production)
+  - Maven
+  - JUnit
 
 
 ## Backend:
@@ -36,12 +55,13 @@ To Run all tests type: mvn clean verify in root folder.
 
 
 
-
 ## Frontend:
 
 - The front end is made using JSF. 
 
 - I have implemented spring security so that some pages require you to be logged in or even be an admin.
+
+
 
 ## Extra functionality:
 
